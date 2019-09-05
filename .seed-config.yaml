@@ -2,10 +2,10 @@ project:
   name: "Gomods"
   state: "unstable" # unstable, beta, stable are supported
   image: ""
-  website: "gomods.okkur.org"
-  oneLiner: "A Caddy plugin that provides vanity URLs and proxy for Go modules"
+  website: "https://gomods.okkur.org"
+  oneLiner: "Caddy plugin that provides a caching Go modules proxy with your own domain."
   description: |
-    Gomods is a Caddy plugin that provides vanity URLs and a proxy server for Go modules.
+    Gomods is a Caddy plugin that provides a caching Go modules proxy with your own domain.
     It supports all the hosting services and VCS` that are supported by Go tools. It also provides local caching
     and parallel workers to fetch and store Go modules.
   version: "v0.0.1"
@@ -18,21 +18,21 @@ vision:
     Provide an easy to use but full featured proxy server for Go modules with Caddy's features.
   items:
     - "Easy to setup and use"
-    - "Local caching"
+    - "Local caching, which can optionally be backed by mounting persistent volumes"
     - "Parallel workers for fetching and storing modules"
   concept: "Gomods' core concept is to make setting up a Go modules proxy server easier and faster."
-  aim: "Gomods accelerates starting a Go modules proxy process by it's easy to understand config and features like parallel workers and local caching"
+  aim: "Gomods accelerates starting a Go modules proxy process with its easy to understand config and features like parallel workers and caching"
 
 supportLinks:
   documentation: "/docs"
 
 readme:
   usageExample: |
-    Gomods uses Go tools in the background for fetching the modules so there should be an installed version of Go on your machine.
+    Gomods uses Go tools in the background for fetching the modules so there needs to be an installed version of Go on your machine.
 
-    For installing Gomods you have to just run the following command:
+    For installing Gomods run the following command:
     ```
-    go get github.com/okkur/gomods
+    go get go.okkur.org/gomods/cmd/gomods
     ```
 
     Then you should create a config file like this example:
@@ -100,14 +100,14 @@ maintainers:
     nick: "stp-ip"
 
 repo:
-  link: "https://github.com/okkur/gomods/"
+  link: "https://gomods.okkur.org/repo"
   type: "Github"
 
 badges:
   - image: "https://img.shields.io/badge/state-beta-blue.svg"
     alt: "state"
   - image: "https://img.shields.io/github/release/okkur/gomods.svg"
-    link: "https://github.com/okkur/gomods/releases"
+    link: "https://gomods.okkur.org/releases"
     alt: "release"
   - image: "https://img.shields.io/github/license/okkur/gomods.svg"
     link: "LICENSE"
