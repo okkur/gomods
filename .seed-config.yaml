@@ -1,0 +1,117 @@
+project:
+  name: "Gomods"
+  state: "unstable" # unstable, beta, stable are supported
+  image: ""
+  website: "gomods.okkur.org"
+  oneLiner: "A Caddy plugin that provides vanity URLs and proxy for Go modules"
+  description: |
+    Gomods is a Caddy plugin that provides vanity URLs and a proxy server for Go modules.
+    It supports all the hosting services and VCS` that are supported by Go tools. It also provides local caching
+    and parallel workers to fetch and store Go modules.
+  version: "v0.0.1"
+  mainLicense: "MIT"
+  docsLicense: "CCBySa"
+
+vision:
+  type: ""
+  overview: |
+    Provide an easy to use but full featured proxy server for Go modules with Caddy's features.
+  items:
+    - "Easy to setup and use"
+    - "Local caching"
+    - "Parallel workers for fetching and storing modules"
+  concept: "Gomods' core concept is to make setting up a Go modules proxy server easier and faster."
+  aim: "Gomods accelerates starting a Go modules proxy process by it's easy to understand config and features like parallel workers and local caching"
+
+supportLinks:
+  documentation: "/docs"
+
+readme:
+  usageExample: |
+    Gomods uses Go tools in the background for fetching the modules so there should be an installed version of Go on your machine.
+
+    For installing Gomods you have to just run the following command:
+    ```
+    go get github.com/okkur/gomods
+    ```
+
+    Then you should create a config file like this example:
+    ```
+    gomods.test {
+      gomods
+    }
+    ```
+    The example above uses the default values for Go binary and number of parallel workers.
+    To customize these values add these fields to your config file:
+    ```
+    gomods.test {
+      gomods {
+        gobinary /usr/bin/go
+        workers 2
+      }
+    }
+    ```
+
+    To enable caching you should also add the `cache` field to the config:
+    ```
+    gomods.test {
+      gomods {
+        cache
+      }
+    }
+    ```
+    Just like `gomods` itself, cache also uses its default values when not provided.
+    You can specify fields like `type` and `path` to customize caching:
+    ```
+    gomods.test {
+      gomods {
+        cache {
+          type local
+          path /home/user/gomods_cache
+        }
+      }
+    }
+    ```
+
+    To run Gomods use the following command:
+    ```
+    $ gomods -conf PATH_TO_CONFIG
+    ```
+
+contributionLinks:
+  issueTemplate: "/.github/ISSUE_TEMPLATE.md"
+  starterIssues: "https://github.com/okkur/gomods/labels/starter%20issue"
+
+emails:
+  commercialSupport: "support@okkur.org"
+  security: "security@okkur.org"
+  coc: "coc@okkur.org"
+
+copyright:
+  owner: "The Gomods authors"
+  year: "2019"
+
+cla:
+  copyrightHolder: "nzt.ventures GmbH"
+  mail: "legal@nzt.ventures"
+
+maintainers:
+  - name: "Michael Grosser"
+    nick: "stp-ip"
+
+repo:
+  link: "https://github.com/okkur/gomods/"
+  type: "Github"
+
+badges:
+  - image: "https://img.shields.io/badge/state-beta-blue.svg"
+    alt: "state"
+  - image: "https://img.shields.io/github/release/okkur/gomods.svg"
+    link: "https://github.com/okkur/gomods/releases"
+    alt: "release"
+  - image: "https://img.shields.io/github/license/okkur/gomods.svg"
+    link: "LICENSE"
+    alt: "license"
+
+reposeed:
+  configVersion: "v1"
