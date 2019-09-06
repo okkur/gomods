@@ -27,4 +27,4 @@ _2019-09-06_
 
 
 ## Changes since v0.0.0
-  - Split out http based Tor proxy code from TXTDirect
+  - Split out gomods proxy code from TXTDirect
