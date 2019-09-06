@@ -1,6 +1,6 @@
 BIN := gomods
 MAINTAINER := okkur
-VERSION := 0.0.1
+VERSION := 0.1.0
 IMAGE := $(MAINTAINER)/$(BIN):$(VERSION)
 
 BUILD_GOOS := $(if $(GOOS),$(GOOS),linux)
