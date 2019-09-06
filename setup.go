@@ -1,7 +1,6 @@
 package gomods
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/caddyserver/caddy"
@@ -64,8 +63,7 @@ type Gomods struct {
 }
 
 func (rd Gomods) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
-	// rd.Config.Serve(w, r)
-	if err := fmt.Errorf(""); err != nil {
+	if err := rd.Config.Serve(w, r); err != nil {
 		if err.Error() == "option disabled" {
 			return rd.Next.ServeHTTP(w, r)
 		}
