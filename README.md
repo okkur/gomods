@@ -4,7 +4,7 @@ Caddy plugin that provides a caching Go modules proxy with your own domain.
 
  [![state](https://img.shields.io/badge/state-beta-blue.svg)]() [![release](https://img.shields.io/github/release/okkur/gomods.svg)](https://gomods.okkur.org/releases) [![license](https://img.shields.io/github/license/okkur/gomods.svg)](LICENSE)
 
-**NOTE: This is a work-in-progress, we do not consider it production ready. Use at your own risk.**
+**NOTE: This is a beta release, we do not consider it completely production ready yet. Use at your own risk.**
 
 Gomods is a Caddy plugin that provides a caching Go modules proxy with your own domain.
 It supports all the hosting services and VCS` that are supported by Go tools. It also provides local caching
@@ -60,7 +60,7 @@ To run Gomods use the following command:
 ```
 $ gomods -conf PATH_TO_CONFIG
 ```
-Take a look at our full [documentation](/docs).
+
 
 ## Support
 For detailed information on support options see our [support guide](/SUPPORT.md).

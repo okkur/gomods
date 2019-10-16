@@ -1,6 +1,6 @@
 project:
   name: "Gomods"
-  state: "unstable" # unstable, beta, stable are supported
+  state: "beta" # unstable, beta, stable are supported
   image: ""
   website: "https://gomods.okkur.org"
   oneLiner: "Caddy plugin that provides a caching Go modules proxy with your own domain."
@@ -8,8 +8,8 @@ project:
     Gomods is a Caddy plugin that provides a caching Go modules proxy with your own domain.
     It supports all the hosting services and VCS` that are supported by Go tools. It also provides local caching
     and parallel workers to fetch and store Go modules.
-  version: "v0.1.0"
-  mainLicense: "MIT"
+  version: "v0.1.1"
+  mainLicense: "Apachev2"
   docsLicense: "CCBySa"
 
 vision:
@@ -22,9 +22,6 @@ vision:
     - "Parallel workers for fetching and storing modules"
   concept: "Gomods' core concept is to make setting up a Go modules proxy server easier and faster."
   aim: "Gomods accelerates starting a Go modules proxy process with its easy to understand config and features like parallel workers and caching"
-
-supportLinks:
-  documentation: "/docs"
 
 readme:
   usageExample: |
