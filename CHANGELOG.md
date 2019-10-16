@@ -25,9 +25,9 @@ _2019-10-16_
 ## Documentation for v0.1.1
 [Documentation](/docs)
 
-
 ## Changes since v0.1.0
   - Update base files via repossed
+  - Use VERSION file
 
 --
 
