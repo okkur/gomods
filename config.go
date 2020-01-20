@@ -11,7 +11,7 @@ type Config struct {
 	GoBinary string `json:"gobinary,omitempty"`
 	Workers  int    `json:"workers,omitempty"`
 	Cache    Cache  `json:"cache,omitempty"`
-	Fs       afero.Fs
+	fs       afero.Fs
 }
 
 type Cache struct {
@@ -30,7 +30,7 @@ const (
 // SetDefaults sets the default values for gomods config
 // if the fields are empty
 func (conf *Config) SetDefaults() {
-	conf.Fs = afero.NewOsFs()
+	conf.fs = afero.NewOsFs()
 	if conf.GoBinary == "" {
 		conf.GoBinary = DefaultGoBinaryPath
 	}
@@ -39,7 +39,7 @@ func (conf *Config) SetDefaults() {
 			conf.Cache.Type = DefaultGomodsCacheType
 		}
 		if conf.Cache.Path == "" {
-			conf.Cache.Path = afero.GetTempDir(conf.Fs, "")
+			conf.Cache.Path = afero.GetTempDir(conf.fs, "")
 		}
 	}
 	if conf.Workers == 0 {
