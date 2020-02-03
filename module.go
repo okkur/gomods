@@ -31,7 +31,7 @@ type ModuleHandler interface {
 }
 
 func (m Module) fetch(r *http.Request, c Config) (download.Protocol, error) {
-	fetcher, err := module.NewGoGetFetcher(c.GoBinary, c.Fs)
+	fetcher, err := module.NewGoGetFetcher(c.GoBinary, nil, c.Fs)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (m Module) storage(c Config) (storage.Backend, error) {
 }
 
 func (m Module) dp(fetcher module.Fetcher, s storage.Backend, c Config) download.Protocol {
-	lister := download.NewVCSLister(c.GoBinary, c.Fs)
+	lister := module.NewVCSLister(c.GoBinary, nil, c.Fs)
 	st := stash.New(fetcher, s, stash.WithPool(c.Workers), stash.WithSingleflight)
 	dpOpts := &download.Opts{
 		Storage: s,
