@@ -1,16 +1,14 @@
 package gomods
 
 import (
+	"bytes"
 	"testing"
 
-	"github.com/caddyserver/caddy"
+	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 	"github.com/spf13/afero"
 )
 
 func Test_parse(t *testing.T) {
-	type args struct {
-		c *caddy.Controller
-	}
 	tests := []struct {
 		configFile string
 		config     Config
@@ -64,11 +62,11 @@ func Test_parse(t *testing.T) {
 			`
 			gomods {
 				gobinary /my/go/binary
+				workers 5
 				cache {
 					type local
 					path /my/cache/path
 				}
-				workers 5
 			}
 			`,
 			Config{
@@ -83,21 +81,36 @@ func Test_parse(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		c := caddy.NewTestController("http", test.configFile)
-		config, err := parse(c)
+		buf := bytes.NewBuffer([]byte(test.configFile))
+		block, err := caddyfile.Parse("Caddyfile", buf)
 		if err != nil {
-			t.Error(err)
+			t.Errorf("Couldn't read the config: %s", err.Error())
+		}
+
+		// Extract the config tokens from the server blocks
+		var tokens []caddyfile.Token
+		for _, segment := range block[0].Segments {
+			for _, token := range segment {
+				tokens = append(tokens, token)
+			}
+		}
+
+		d := caddyfile.NewDispenser(tokens)
+		g := &Gomods{}
+
+		if err := g.UnmarshalCaddyfile(d); err != nil {
+			t.Errorf("Couldn't parse the config: %s", err.Error())
 		}
 
 		// Fs field gets filled by default when parsing the config
-		test.config.Fs = config.Fs
+		test.config.fs = g.Config.fs
 		// Set the default cache path for expected config if cache type is tmp
-		if config.Cache.Type == "tmp" {
-			test.config.Cache.Path = afero.GetTempDir(test.config.Fs, "")
+		if g.Config.Cache.Type == "tmp" {
+			test.config.Cache.Path = afero.GetTempDir(test.config.fs, "")
 		}
 
-		if config != test.config {
-			t.Errorf("Expected config to be %+v, but got %+v", test.config, config)
+		if g.Config != test.config {
+			t.Errorf("Expected config to be %+v, but got %+v", test.config, g.Config)
 		}
 	}
 }

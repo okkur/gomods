@@ -1,74 +1,57 @@
 package gomods
 
 import (
+	"fmt"
 	"net/http"
 
-	"github.com/caddyserver/caddy"
-	"github.com/caddyserver/caddy/caddy/caddymain"
-	"github.com/caddyserver/caddy/caddyhttp/httpserver"
+	"github.com/caddyserver/caddy/v2"
+	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
+	"github.com/caddyserver/caddy/v2/caddyconfig/httpcaddyfile"
+	"github.com/caddyserver/caddy/v2/modules/caddyhttp"
 )
 
-func main() {
-	caddymain.EnableTelemetry = false
-	caddymain.Run()
-}
-
-func init() {
-	caddy.RegisterPlugin("gomods", caddy.Plugin{
-		ServerType: "http",
-		Action:     setup,
-	})
-	// TODO: hardcode directive after stable release into Caddy
-	httpserver.RegisterDevDirective("gomods", "")
-}
-
-func parse(c *caddy.Controller) (Config, error) {
-	var config Config
-
-	for c.Next() {
-		if c.Val() == "gomods" {
-			c.Next() // skip directive name
-		}
-
-		config.ParseGomods(c)
-	}
-
-	config.SetDefaults()
-
-	return config, nil
-}
-
-func setup(c *caddy.Controller) error {
-	config, err := parse(c)
-	if err != nil {
-		return err
-	}
-
-	// Add handler to Caddy
-	cfg := httpserver.GetConfig(c)
-	mid := func(next httpserver.Handler) httpserver.Handler {
-		return Gomods{
-			Next:   next,
-			Config: config,
-		}
-	}
-	cfg.AddMiddleware(mid)
-
-	return nil
-}
-
 type Gomods struct {
-	Next   httpserver.Handler
 	Config Config
 }
 
-func (rd Gomods) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
-	if err := rd.Config.Serve(w, r); err != nil {
-		if err.Error() == "option disabled" {
-			return rd.Next.ServeHTTP(w, r)
-		}
-		return http.StatusInternalServerError, err
-	}
+func init() {
+	caddy.RegisterModule(Gomods{})
+	httpcaddyfile.RegisterHandlerDirective("gomods", parse)
+}
 
-	return 0, nil
+func parse(h httpcaddyfile.Helper) (caddyhttp.MiddlewareHandler, error) {
+	var g Gomods
+	err := g.UnmarshalCaddyfile(h.Dispenser)
+	return g, err
+}
+
+// UnmarshalCaddyfile implements caddyfile.Unmarshaler.
+func (g *Gomods) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
+	for d.Next() {
+		if d.Val() == "gomods" {
+			d.Next()
+			if d.Val() != "{" {
+				break
+			}
+			d.Next()
+		}
+		if err := g.Config.ParseGomods(d); err != nil {
+			return fmt.Errorf("[gomods]: Couldn't parse the config: %s", err.Error())
+		}
+	}
+	g.Config.SetDefaults()
+	return nil
+}
+
+// CaddyModule returns the Caddy module information.
+func (Gomods) CaddyModule() caddy.ModuleInfo {
+	return caddy.ModuleInfo{
+		Name: "http.handlers.gomods",
+		New:  func() caddy.Module { return new(Gomods) },
+	}
+}
+
+// ServeHTTP implements caddyhttp.MiddlewareHandler.
+func (g Gomods) ServeHTTP(w http.ResponseWriter, r *http.Request, next caddyhttp.Handler) error {
+	return g.Config.Serve(w, r)
 }
