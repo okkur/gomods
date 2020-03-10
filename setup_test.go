@@ -4,15 +4,11 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/caddyserver/caddy"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 	"github.com/spf13/afero"
 )
 
 func Test_parse(t *testing.T) {
-	type args struct {
-		c *caddy.Controller
-	}
 	tests := []struct {
 		configFile string
 		config     Config
