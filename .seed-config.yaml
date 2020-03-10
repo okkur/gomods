@@ -8,7 +8,7 @@ project:
     Gomods is a Caddy plugin that provides a caching Go modules proxy with your own domain.
     It supports all the hosting services and VCS` that are supported by Go tools. It also provides local caching
     and parallel workers to fetch and store Go modules.
-  version: "v0.1.1"
+  version: "v0.1.3"
   mainLicense: "Apachev2"
   docsLicense: "CCBySa"
 
@@ -29,7 +29,7 @@ readme:
 
     For installing Gomods run the following command:
     ```
-    go get go.okkur.org/gomods/cmd/gomods
+    go get go.okkur.org/gomods/cmd/gomods@caddy-v1
     ```
 
     Then you should create a config file like this example:

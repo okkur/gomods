@@ -16,6 +16,31 @@ _2017_
 
 -->
 
+# v0.1.3
+***final release supporting caddy v1***
+_2020-02-27_
+  - [Downloads for v0.1.3](https://github.com/okkur/gomods/releases/tag/v0.1.3)
+  - [Changelog since v0.1.2](#changes-since-v012)
+  - [Documentation for v0.1.3](#documentation-for-v013)
+
+## Documentation for v0.1.3
+[Documentation](/docs)
+
+## Changes since v0.1.2
+  - Fix dependencies
+
+# v0.1.2
+_2020-01-23_
+  - [Downloads for v0.1.2](https://github.com/okkur/gomods/releases/tag/v0.1.2)
+  - [Changelog since v0.1.1](#changes-since-v011)
+  - [Documentation for v0.1.2](#documentation-for-v012)
+
+## Documentation for v0.1.2
+[Documentation](/docs)
+
+## Changes since v0.1.1
+  - Branch off Caddy v1 support
+
 # v0.1.1
 _2019-10-16_
   - [Downloads for v0.1.1](https://github.com/okkur/gomods/releases/tag/v0.1.1)
