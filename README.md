@@ -1,8 +1,5 @@
 # Gomods
 
-**This version supports Caddy v1 only.**
-**For the latest Caddy support take a look at the latest version and code.**
-
 Caddy plugin that provides a caching Go modules proxy with your own domain.
 
  [![state](https://img.shields.io/badge/state-beta-blue.svg)]() [![release](https://img.shields.io/github/release/okkur/gomods.svg)](https://gomods.okkur.org/releases) [![license](https://img.shields.io/github/license/okkur/gomods.svg)](LICENSE)
@@ -14,11 +11,13 @@ It supports all the hosting services and VCS` that are supported by Go tools. It
 and parallel workers to fetch and store Go modules.
 
 ## Using Gomods
+Note: The `master` branch is using [Caddy v2](https://caddyserver.com), if you want to use Gomods with previous Caddy versions, check the caddy-v1 branch.
+
 Gomods uses Go tools in the background for fetching the modules so there needs to be an installed version of Go on your machine.
 
 For installing Gomods run the following command:
 ```
-go get go.okkur.org/gomods/cmd/gomods@caddy-v1
+go get go.okkur.org/gomods/cmd/gomods
 ```
 
 Then you should create a config file like this example:
@@ -27,6 +26,7 @@ gomods.test {
   gomods
 }
 ```
+
 The example above uses the default values for Go binary and number of parallel workers.
 To customize these values add these fields to your config file:
 ```
@@ -46,6 +46,7 @@ gomods.test {
   }
 }
 ```
+
 Just like `gomods` itself, cache also uses its default values when not provided.
 You can specify fields like `type` and `path` to customize caching:
 ```
@@ -59,9 +60,12 @@ gomods.test {
 }
 ```
 
-To run Gomods use the following command:
+For more information about the configuration options and the JSON config
+example, check the [Configuration](/docs/configuration.md) page.
+
+To run Gomods run the following command in the same directory that the config file is located:
 ```
-$ gomods -conf PATH_TO_CONFIG
+$ gomods start
 ```
 
 
