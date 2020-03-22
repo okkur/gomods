@@ -16,6 +16,24 @@ _2017_
 
 -->
 
+# v0.2.0
+
+_2020-03-23_
+
+- [Downloads for v0.2.0](https://github.com/okkur/gomods/releases/tag/v0.2.0)
+- [Changelog since v0.1.3](#changes-since-v013)
+- [Documentation for v0.2.0](#documentation-for-v020)
+
+## Documentation for v0.2.0
+
+[Documentation](/docs)
+
+## Changes since v0.1.3
+
+- Upgrade the master branch to [Caddy v2](https://caddyserver.com/)
+
+---
+
 # v0.1.3
 ***final release supporting caddy v1***
 _2020-02-27_
