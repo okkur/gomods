@@ -25,11 +25,13 @@ vision:
 
 readme:
   usageExample: |
+    Note: The `master` branch is using [Caddy v2](https://caddyserver.com), if you want to use Gomods with previous Caddy versions, check the caddy-v1 branch.
+
     Gomods uses Go tools in the background for fetching the modules so there needs to be an installed version of Go on your machine.
 
     For installing Gomods run the following command:
     ```
-    go get go.okkur.org/gomods/cmd/gomods@caddy-v1
+    go get go.okkur.org/gomods/cmd/gomods
     ```
 
     Then you should create a config file like this example:
@@ -38,6 +40,7 @@ readme:
       gomods
     }
     ```
+
     The example above uses the default values for Go binary and number of parallel workers.
     To customize these values add these fields to your config file:
     ```
@@ -57,6 +60,7 @@ readme:
       }
     }
     ```
+
     Just like `gomods` itself, cache also uses its default values when not provided.
     You can specify fields like `type` and `path` to customize caching:
     ```
@@ -70,9 +74,12 @@ readme:
     }
     ```
 
-    To run Gomods use the following command:
+    For more information about the configuration options and the JSON config
+    example, check the [Configuration](/docs/configuration.md) page.
+
+    To run Gomods run the following command in the same directory that the config file is located:
     ```
-    $ gomods -conf PATH_TO_CONFIG
+    $ gomods start
     ```
 
 contributionLinks:
